@@ -1,6 +1,7 @@
 package com.example.mainscreen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,9 +24,11 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.mainscreen.ui.theme.MainScreenTheme
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun RegisterScreen() {
+fun SignupScreen(navController: NavController) {
 
     Box(
         modifier = Modifier
@@ -124,6 +127,29 @@ fun RegisterScreen() {
                         fontWeight = FontWeight.Bold
                     )
                 }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Box(
+                    modifier = Modifier
+                        .width(230.dp)
+                        .height(44.dp)
+                        .background(
+                            Color.LightGray,
+                            RoundedCornerShape(25.dp)
+                        )
+                        .clickable {
+                            navController.popBackStack()
+                        },
+                    contentAlignment = Alignment.Center
+                ) {
+
+                    Text(
+                        text = "Cancel",
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
         }
     }
@@ -131,8 +157,8 @@ fun RegisterScreen() {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun RegisterPreview() {
+fun SignupPreview() {
     MainScreenTheme {
-        RegisterScreen()
+        SignupScreen(navController = rememberNavController())
     }
 }

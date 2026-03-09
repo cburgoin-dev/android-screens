@@ -3,6 +3,7 @@ package com.example.mainscreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -17,9 +18,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.mainscreen.ui.theme.MainScreenTheme
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(navController: NavController) {
 
     Box(
         modifier = Modifier
@@ -81,7 +84,10 @@ fun WelcomeScreen() {
                         .background(
                             Color(79, 76, 177),
                             RoundedCornerShape(25.dp)
-                        ),
+                        )
+                        .clickable {
+                            navController.navigate("login")
+                        },
                     contentAlignment = Alignment.Center
                 ) {
 
@@ -102,7 +108,10 @@ fun WelcomeScreen() {
                             2.dp,
                             Color(79, 76, 177),
                             RoundedCornerShape(25.dp)
-                        ),
+                        )
+                        .clickable {
+                            navController.navigate("signup")
+                        },
                     contentAlignment = Alignment.Center
                 ) {
 
@@ -154,6 +163,6 @@ fun WelcomeScreen() {
 @Composable
 fun WelcomePreview() {
     MainScreenTheme {
-        WelcomeScreen()
+        WelcomeScreen(navController = rememberNavController())
     }
 }
