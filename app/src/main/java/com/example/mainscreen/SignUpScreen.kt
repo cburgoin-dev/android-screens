@@ -1,7 +1,6 @@
 package com.example.mainscreen
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,9 +25,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.mainscreen.ui.theme.MainScreenTheme
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 
 @Composable
-fun SignupScreen(navController: NavController) {
+fun SignUpScreen(navController: NavController) {
+
+    // States
+    var username by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var phone by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
+
+    // Validations
+    val isUsernameValid = username.matches(Regex("^[a-zA-Z]+\$"))
+    val isEmailValid = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    val isPhoneValid = phone.matches(Regex("^\\d{10}$"))
+    val arePasswordsValid = password.isNotEmpty() && password == confirmPassword
+    val isFormValid = isUsernameValid && isEmailValid && isPhoneValid && arePasswordsValid
 
     Box(
         modifier = Modifier
@@ -67,7 +83,7 @@ fun SignupScreen(navController: NavController) {
 
                 OutlinedTextField(
                     value = "",
-                    onValueChange = {},
+                    onValueChange = { username = it },
                     label = { Text("Username") },
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -76,7 +92,7 @@ fun SignupScreen(navController: NavController) {
 
                 OutlinedTextField(
                     value = "",
-                    onValueChange = {},
+                    onValueChange = { email = it },
                     label = { Text("Email") },
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -85,7 +101,7 @@ fun SignupScreen(navController: NavController) {
 
                 OutlinedTextField(
                     value = "",
-                    onValueChange = {},
+                    onValueChange = { phone = it },
                     label = { Text("Phone") },
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -94,7 +110,7 @@ fun SignupScreen(navController: NavController) {
 
                 OutlinedTextField(
                     value = "",
-                    onValueChange = {},
+                    onValueChange = { password = it },
                     label = { Text("Password") },
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -103,24 +119,24 @@ fun SignupScreen(navController: NavController) {
 
                 OutlinedTextField(
                     value = "",
-                    onValueChange = {},
+                    onValueChange = { confirmPassword = it },
                     label = { Text("Confirm Password") },
                     modifier = Modifier.fillMaxWidth()
                 )
 
                 Spacer(modifier = Modifier.height(30.dp))
 
-                Box(
+                Button(
+                    onClick = { },
+                    enabled = isFormValid,
                     modifier = Modifier
                         .width(230.dp)
-                        .height(44.dp)
-                        .background(
-                            Color(79,76,177),
-                            RoundedCornerShape(25.dp)
-                        ),
-                    contentAlignment = Alignment.Center
+                        .height(44.dp),
+                    shape = RoundedCornerShape(25.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(79,76,177)
+                    )
                 ) {
-
                     Text(
                         text = "Sign Up",
                         color = Color.White,
@@ -130,20 +146,16 @@ fun SignupScreen(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                Box(
+                Button(
+                    onClick = { navController.popBackStack() },
                     modifier = Modifier
                         .width(230.dp)
-                        .height(44.dp)
-                        .background(
-                            Color.LightGray,
-                            RoundedCornerShape(25.dp)
-                        )
-                        .clickable {
-                            navController.popBackStack()
-                        },
-                    contentAlignment = Alignment.Center
+                        .height(44.dp),
+                    shape = RoundedCornerShape(25.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.LightGray
+                    )
                 ) {
-
                     Text(
                         text = "Cancel",
                         color = Color.Black,
@@ -157,8 +169,8 @@ fun SignupScreen(navController: NavController) {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun SignupPreview() {
+fun SignUpPreview() {
     MainScreenTheme {
-        SignupScreen(navController = rememberNavController())
+        SignUpScreen(navController = rememberNavController())
     }
 }

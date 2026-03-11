@@ -1,7 +1,6 @@
 package com.example.mainscreen
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +25,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.mainscreen.ui.theme.MainScreenTheme
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 
 @Composable
 fun LoginScreen(navController: NavController) {
@@ -81,17 +82,16 @@ fun LoginScreen(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(40.dp))
 
-                Box(
+                Button(
+                    onClick = { },
                     modifier = Modifier
                         .width(230.dp)
-                        .height(44.dp)
-                        .background(
-                            Color(79,76,177),
-                            RoundedCornerShape(25.dp)
-                        ),
-                    contentAlignment = Alignment.Center
+                        .height(44.dp),
+                    shape = RoundedCornerShape(25.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(79,76,177)
+                    )
                 ) {
-
                     Text(
                         text = "Login",
                         color = Color.White,
@@ -101,20 +101,16 @@ fun LoginScreen(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                Box(
+                Button(
+                    onClick = { navController.popBackStack() },
                     modifier = Modifier
                         .width(230.dp)
-                        .height(44.dp)
-                        .background(
-                            Color.LightGray,
-                            RoundedCornerShape(25.dp)
-                        )
-                        .clickable {
-                            navController.popBackStack()
-                        },
-                    contentAlignment = Alignment.Center
+                        .height(44.dp),
+                    shape = RoundedCornerShape(25.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.LightGray
+                    )
                 ) {
-
                     Text(
                         text = "Cancel",
                         color = Color.Black,
