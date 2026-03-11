@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,6 +29,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.KeyboardType
 
 @Composable
 fun SignUpScreen(navController: NavController) {
@@ -82,7 +85,7 @@ fun SignUpScreen(navController: NavController) {
                 Spacer(modifier = Modifier.height(30.dp))
 
                 OutlinedTextField(
-                    value = "",
+                    value = username,
                     onValueChange = { username = it },
                     label = { Text("Username") },
                     modifier = Modifier.fillMaxWidth()
@@ -91,16 +94,17 @@ fun SignUpScreen(navController: NavController) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = "",
+                    value = email,
                     onValueChange = { email = it },
                     label = { Text("Email") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    isError = email.isNotEmpty() && !isEmailValid
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = "",
+                    value = phone,
                     onValueChange = { phone = it },
                     label = { Text("Phone") },
                     modifier = Modifier.fillMaxWidth()
@@ -109,19 +113,27 @@ fun SignUpScreen(navController: NavController) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = "",
+                    value = password,
                     onValueChange = { password = it },
                     label = { Text("Password") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password
+                    )
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = "",
+                    value = confirmPassword,
                     onValueChange = { confirmPassword = it },
                     label = { Text("Confirm Password") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password
+                    )
                 )
 
                 Spacer(modifier = Modifier.height(30.dp))
