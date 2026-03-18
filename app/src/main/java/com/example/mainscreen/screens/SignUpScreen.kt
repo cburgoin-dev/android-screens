@@ -1,5 +1,6 @@
-package com.example.mainscreen
+package com.example.mainscreen.screens
 
+import android.util.Patterns
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -44,7 +45,7 @@ fun SignUpScreen(navController: NavController) {
 
     // Validations
     val isUsernameValid = username.matches(Regex("^[a-zA-Z]+\$"))
-    val isEmailValid = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    val isEmailValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()
     val isPhoneValid = phone.matches(Regex("^\\d{10}$"))
     val arePasswordsValid = password.isNotEmpty() && password == confirmPassword
     val isFormValid = isUsernameValid && isEmailValid && isPhoneValid && arePasswordsValid

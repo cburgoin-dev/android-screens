@@ -7,6 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import com.example.mainscreen.ui.theme.MainScreenTheme
 import androidx.navigation.compose.*
 import androidx.compose.runtime.Composable
+import com.example.mainscreen.screens.LoginScreen
+import com.example.mainscreen.screens.SignUpScreen
+import com.example.mainscreen.screens.WelcomeScreen
 
 class MainActivity : ComponentActivity() {
 

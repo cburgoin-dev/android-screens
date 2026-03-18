@@ -1,5 +1,6 @@
-package com.example.mainscreen
+package com.example.mainscreen.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -21,8 +22,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.KeyboardType
+import com.example.mainscreen.R
 
 @Composable
 fun WelcomeScreen(navController: NavController) {
@@ -105,7 +105,7 @@ fun WelcomeScreen(navController: NavController) {
                         .width(230.dp)
                         .height(44.dp),
                     shape = RoundedCornerShape(25.dp),
-                    border = androidx.compose.foundation.BorderStroke(
+                    border = BorderStroke(
                         2.dp,
                         Color(79, 76, 177)
                     )
